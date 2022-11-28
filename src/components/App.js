@@ -60,30 +60,30 @@ function App() {
       {/* Formulario new contact */}
       <form>
           <h2>Añadir una adalaber</h2>
+          <p className=''>Nombre</p>
           <input
             className="new-contact__input"
             type="text"
             name="name"
             id="name"
-            placeholder="Nombre"
             onInput={handleNewContact}
             value={newContact.name}
           />
+          <p className=''>Tutora</p>
           <input
             className="new-contact__input"
             type="text"
             name="counselor"
             id="counselor"
-            placeholder="Tutora"
             onInput={handleNewContact}
             value={newContact.counselor}
           />
+          <p className=''>Especialidad</p>
           <input
             className="new-contact__input"
             type="text"
             name="speciality"
             id="speciality"
-            placeholder="Especialidad"
             onInput={handleNewContact}
             value={newContact.speciality}
           />
