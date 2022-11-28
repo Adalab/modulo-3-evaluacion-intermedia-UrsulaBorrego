@@ -6,8 +6,27 @@ function App() {
   
   // VARIABLES ESTADO
   const [data, setData] = useState(contacts.results);
+  const [newContact, setNewContact] = useState ({
+    name: '',
+    counselor: '',
+    speciality: '',
+  });
   
   // FUNCIONES HANDLER
+  const handleNewContact = (ev) =>{
+    setNewContact({...newContact,[ev.target.id]: ev.target.value});
+  };
+
+  const handleClick = (ev) =>{
+    ev.preventDefault();
+    data.push(newContact);
+    setData([...data]);
+    setNewContact({
+      name: '',
+      counselor: '',
+      speciality: '',
+    });
+  }
 
   // FUNCIONES Y VARIABLES QUE AYUDEN A RENDERIZAR HTML
   console.log(data);
@@ -28,17 +47,54 @@ function App() {
       <h1 className="title">Adalabers</h1>
 
       <table className="table">
-        {/* <!-- Fila de cabecera --> */}
         <thead><tr>
           <th>Nombre</th>
           <th>Tutora</th>
           <th>Especialidad</th>
         </tr></thead>
-        {/* <!-- Fin fila de cabecera --> */}
 
         <tbody>{htmlData}</tbody>
 
       </table>
+
+      {/* Formulario new contact */}
+      <form>
+          <h2>Añadir una adalaber</h2>
+          <input
+            className="new-contact__input"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Nombre"
+            onInput={handleNewContact}
+            value={newContact.name}
+          />
+          <input
+            className="new-contact__input"
+            type="text"
+            name="counselor"
+            id="counselor"
+            placeholder="Tutora"
+            onInput={handleNewContact}
+            value={newContact.counselor}
+          />
+          <input
+            className="new-contact__input"
+            type="text"
+            name="speciality"
+            id="speciality"
+            placeholder="Especialidad"
+            onInput={handleNewContact}
+            value={newContact.speciality}
+          />
+          <input
+            className="new-contact__btn"
+            type="submit"
+            value="Añadir una nueva Adalaber"
+            onClick={handleClick}
+          />
+        </form>
+      
     </div>
   );
 }
