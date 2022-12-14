@@ -10,6 +10,7 @@ function App() {
     counselor: "",
     speciality: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
 
   // FUNCIONES HANDLER
   const handleNewContact = (ev) => {
@@ -18,13 +19,21 @@ function App() {
 
   const handleClick = (ev) => {
     ev.preventDefault();
-    data.push(newContact);
-    setData([...data]);
-    setNewContact({
-      name: "",
-      counselor: "",
-      speciality: "",
-    });
+    if (
+      newContact.name !== "" &&
+      newContact.counselor !== "" &&
+      newContact.speciality !== ""
+    ) {
+      data.push(newContact);
+      setData([...data]);
+      setNewContact({
+        name: "",
+        counselor: "",
+        speciality: "",
+      });
+    } else {
+      setErrorMsg("*Debes rellenar todos los campos");
+    }
   };
 
   // FUNCIONES Y VARIABLES QUE AYUDEN A RENDERIZAR HTML
@@ -59,6 +68,7 @@ function App() {
       {/* Formulario new contact */}
       <form>
         <h2>Añadir una adalaber</h2>
+        <p>{errorMsg}</p>
         <label htmlFor="name">Nombre</label>
         <input
           className="new-contact__input"
